@@ -9,6 +9,7 @@ on:
 
 jobs:
   docker:
+    if: github.ref_type == 'tag' && github.ref == 'refs/heads/dev'
     runs-on: ubuntu-latest
     steps:
       - 
