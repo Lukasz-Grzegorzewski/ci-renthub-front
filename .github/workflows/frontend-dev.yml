@@ -2,6 +2,8 @@ name: Frontend dev CI
 
 on:
   push:
+    branches:
+      - dev
     tags:
       - 'd*'
 
