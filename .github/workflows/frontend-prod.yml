@@ -42,6 +42,20 @@ jobs:
       - 
         name: Debug meta
         run:  echo "Tags => ${{ steps.meta.outputs.tags }}"
+
+      - 
+        uses: haya14busa/action-cond@v1
+        name: Tag or Sha
+        id: tag_sha
+        with:
+          cond: ${{ steps.meta.outputs.tags != '***/front:main' }}
+          if_true: ${{ steps.meta.outputs.tags }}
+          if_false: "renthub/front:${{github.sha}}"
+
+      - 
+        name: Use conditional value
+        run: echo "tag_sha => ${{ steps.tag_sha.outputs.value }}"
+
       - 
         name: Set up QEMU
         uses: docker/setup-qemu-action@v3
