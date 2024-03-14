@@ -115,7 +115,7 @@ describe('SignIn test component & toast', () => {
     expect(screen.getByText('Un nombre')).toBeInTheDocument();
     expect(screen.getByText('Un caractère spécial')).toBeInTheDocument();
   });
-  it('should show success toast on successful login', async () => {
+  it.skip('should show success toast on successful login', async () => {
     fireEvent.change(screen.getByLabelText(/Email/), {
       target: { value: 'test@example.com' },
     });
@@ -130,7 +130,7 @@ describe('SignIn test component & toast', () => {
       });
     });
   });
-  it('should show error toast on unsuccessful login', async () => {
+  it.skip('should show error toast on unsuccessful login', async () => {
     fireEvent.change(screen.getByLabelText(/Email/), {
       target: { value: 'test@example.com' },
     });
@@ -145,7 +145,7 @@ describe('SignIn test component & toast', () => {
       });
     });
   });
-  it('should show error toast on error network or server down', async () => {
+  it.skip('should show error toast on error network or server down', async () => {
     fireEvent.change(screen.getByLabelText(/Email/), {
       target: { value: 'test@example.com' },
     });

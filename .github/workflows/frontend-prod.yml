@@ -2,16 +2,14 @@ name: Frontend prod CI
 
 on:
   push:
-    paths:
-      - "frontend/**"
+    branches:
+      - main
     tags:
       - 'v*'
   pull_request:
     types:
       - opened
       - reopened
-    paths:
-      - "frontend/**"
     branches:
       - 'main'
       - 'dev'
@@ -22,23 +20,26 @@ jobs:
     steps:
       - name: Check out code
         uses: actions/checkout@v4
+
       - name: Goto frontend and run tests
-        run: cd frontend && npm i && npm test
-  docker:
-    needs: 
-      - test
-    if: github.ref == 'refs/heads/main'
+        run: npm i && npm test
+
+  dockerTag:
+    needs: test
+    if: github.event_name == 'push' && (github.ref == 'refs/heads/main' || startsWith(github.ref, 'refs/tags/v'))
     runs-on: ubuntu-latest
     steps:
       - 
         name: Checkout
         uses: actions/checkout@v4
+
       -
         name: Docker meta
         id: meta
         uses: docker/metadata-action@v5
         with:
-          images: lukaszgrzegorzewski/renthub_backend-ci
+          images: renthub/front
+
       - 
         name: Debug meta
         run:  echo "Tags => ${{ steps.meta.outputs.tags }}"
@@ -59,21 +60,24 @@ jobs:
       - 
         name: Set up QEMU
         uses: docker/setup-qemu-action@v3
+
       - 
         name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v3
+
       - 
         name: Login to Docker Hub
         uses: docker/login-action@v3
         with:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
+
       - 
         name: Build and push
         uses: docker/build-push-action@v5
         with:
           context: .
           target: prod
-          platforms: linux/amd64, linux/arm64, linux/386
+          platforms: linux/amd64, linux/arm64
           push: true
-          tags: ${{ steps.meta.outputs.tags }}
+          tags: ${{ steps.tag_sha.outputs.value }}
