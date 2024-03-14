@@ -1,10 +1,10 @@
 import LayoutFull from '@/components/layout/LayoutFull';
-import UserConnection from '@/components/users/userConnection/UserConnection';
+import SignUp from '@/components/users/signup/SignUp';
 
 const SignUpPage = (): React.ReactNode => {
   return (
-    <LayoutFull title="RentHub : Connexion">
-      <UserConnection />
+    <LayoutFull title="RentHub : Inscription">
+      <SignUp />
     </LayoutFull>
   );
 };

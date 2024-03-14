@@ -15,15 +15,35 @@ import { Suspense, useEffect } from 'react';
 import { useRouter } from 'next/router';
 import { UserContextTypes } from '@/types/UserTypes';
 import Header from '@/components/appBar/AppBar';
+import { API_URL } from '@/api/configApi';
 
 const theme = createTheme({
+  typography: {
+    fontFamily: ['Poppins', 'sans-serif'].join(','),
+    h1: {
+      fontFamily: ['Poppins-Medium', 'sans-serif'].join(','),
+    },
+    h2: {
+      fontFamily: ['Poppins-Medium', 'sans-serif'].join(','),
+    },
+    h3: {
+      fontFamily: ['Poppins-Medium', 'sans-serif'].join(','),
+    },
+    h4: {
+      fontFamily: ['Poppins-Medium', 'sans-serif'].join(','),
+    },
+    h5: {
+      fontFamily: ['Poppins-Medium', 'sans-serif'].join(','),
+    },
+  },
+
   palette: {
     mode: 'light',
     background: {
-      default: '#f5f5f5',
+      default: 'FFFFFF',
     },
     primary: {
-      main: '#ffa41b',
+      main: '#FF8E3C',
       light: '#FFB648',
       dark: '#e89116',
     },
@@ -33,16 +53,26 @@ const theme = createTheme({
       dark: '#24282C',
     },
   },
+  components: {
+    MuiPaper: {
+      styleOverrides: {
+        root: {
+          backgroundColor: '#F8F8F8',
+        },
+      },
+    },
+  },
 });
+
 const client = new ApolloClient({
   link: new HttpLink({
-    uri: 'http://localhost:5000/',
+    uri: API_URL || 'http://localhost:5000/',
     credentials: 'include',
   }),
   cache: new InMemoryCache(),
 });
 
-const privatePages = ['/compte', '/annonces/new'];
+const privatePages = ['/compte'];
 
 function AuthProvider({ children }: { children: React.ReactNode }) {
   const { loading, error, refetch } = useQuery<{
@@ -65,7 +95,7 @@ function AuthProvider({ children }: { children: React.ReactNode }) {
 
   useEffect(() => {
     if (privatePages.includes(router.pathname) && error) {
-      router.replace('/connexion');
+      router.replace('/signin');
     }
   }, [router, error]);
 

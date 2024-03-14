@@ -4,18 +4,23 @@ export const mutationCreateUser = gql`
   mutation userCreate($data: UserCreateInput!) {
     item: userCreate(data: $data) {
       id
-      nickName
-      registrationDate
+      firstName
     }
   }
 `;
 
 export const mutationVerifyEmail = gql`
-  mutation verifyEmail($token: String!) {
-    item: verifyEmail(token: $token) {
-      success
+  mutation VerifyEmail($data: VerifyEmailResponseInput!) {
+    verifyEmail(data: $data) {
       message
+      success
     }
+  }
+`;
+
+export const mutationReSendCode = gql`
+  mutation GenerateNewVerificationCode($data: ReSendVerificationCodeInput!) {
+    generateNewVerificationCode(data: $data)
   }
 `;
 
@@ -23,7 +28,7 @@ export const mutationUserLogin = gql`
   mutation userLogin($data: UserLoginInput!) {
     item: userLogin(data: $data) {
       id
-      nickName
+      firstName
     }
   }
 `;
