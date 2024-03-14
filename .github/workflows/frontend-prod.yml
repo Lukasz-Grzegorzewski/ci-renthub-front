@@ -2,16 +2,14 @@ name: Frontend prod CI
 
 on:
   push:
-    paths:
-      - "frontend/**"
+    branches:
+      - main
     tags:
       - 'v*'
   pull_request:
     types:
       - opened
       - reopened
-    paths:
-      - "frontend/**"
     branches:
       - 'main'
       - 'dev'
@@ -27,7 +25,7 @@ jobs:
   docker:
     needs: 
       - test
-    if: github.ref == 'refs/heads/main'
+    if: github.ref == 'refs/heads/main' || startsWith(github.ref, 'refs/tags/v')
     runs-on: ubuntu-latest
     steps:
       - 
@@ -63,3 +61,4 @@ jobs:
           platforms: linux/amd64, linux/arm64, linux/386
           push: true
           tags: ${{ steps.meta.outputs.tags }}
+          labels: ${{ steps.meta.outputs.labels }}
