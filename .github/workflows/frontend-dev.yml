@@ -2,14 +2,11 @@ name: Frontend dev CI
 
 on:
   push:
-    paths:
-      - "frontend/**"
     tags:
       - 'd*'
 
 jobs:
   docker:
-    if: github.ref == 'refs/heads/dev' || (github.ref_type == 'tag' && startsWith(github.ref, 'refs/tags/d'))
     runs-on: ubuntu-latest
     steps:
       - 
