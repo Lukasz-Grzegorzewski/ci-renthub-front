@@ -2,11 +2,14 @@ name: Frontend dev CI
 
 on:
   push:
+    branches:
+      - dev
     tags:
       - 'd*'
 
 jobs:
   docker:
+    if: github.ref_type == 'tag' && github.ref == 'refs/heads/dev' || startsWith(github.ref, 'refs/tags/d')
     runs-on: ubuntu-latest
     steps:
       - 
@@ -39,6 +42,6 @@ jobs:
         with:
           context: .
           target: dev
-          platforms: linux/amd64, linux/arm64, linux/386
+          platforms: linux/amd64, linux/arm64
           push: true
           tags: ${{ steps.meta.outputs.tags }}
