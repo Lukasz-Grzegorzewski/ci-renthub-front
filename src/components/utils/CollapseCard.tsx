@@ -1,6 +1,6 @@
-import { useState } from 'react';
+import { useState } from "react";
 // MUI imports
-import { KeyboardArrowDown, KeyboardArrowUp } from '@mui/icons-material';
+import { KeyboardArrowDown, KeyboardArrowUp } from "@mui/icons-material";
 import {
   Card,
   CardProps,
@@ -9,9 +9,9 @@ import {
   Stack,
   Typography,
   Button,
-} from '@mui/material';
-import { styled } from '@mui/material';
-import Link from 'next/link';
+} from "@mui/material";
+import { styled } from "@mui/material";
+import Link from "next/link";
 
 type CollapseCardPropsType = {
   id: number;
@@ -22,31 +22,31 @@ function CollapseCard({ id, priceArray }: CollapseCardPropsType) {
   const [expand, setExpand] = useState<boolean | undefined>(false);
 
   const CollapseCardStyled = styled<typeof Card>(Card)<CardProps>(() => ({
-    display: 'flex',
-    flexDirection: 'column',
-    justifyContent: 'center',
-    borderRadius: '13px',
-    outline: '1px solid black',
-    boxShadow: 'none',
-    whiteSpace: 'nowrap',
+    display: "flex",
+    flexDirection: "column",
+    justifyContent: "center",
+    borderRadius: "13px",
+    outline: "1px solid black",
+    boxShadow: "none",
+    whiteSpace: "nowrap",
     transition:
-      'background-color 0.3s ease, color 0.3s ease, font-weight 0.3s ease',
-    backgroundColor: 'white',
-    color: 'black',
+      "background-color 0.3s ease, color 0.3s ease, font-weight 0.3s ease",
+    backgroundColor: "white",
+    color: "black",
   }));
 
   return (
-    <Button sx={{ padding: 0, textTransform: 'none' }}>
+    <Button sx={{ padding: 0, textTransform: "none" }}>
       <CollapseCardStyled>
         <Stack
           sx={{
-            display: 'flex',
-            height: '25px',
-            flexDirection: 'row',
-            alignItems: 'center',
-            padding: '0 20px',
-            margin: '0',
-            cursor: 'pointer',
+            display: "flex",
+            height: "25px",
+            flexDirection: "row",
+            alignItems: "center",
+            padding: "0 20px",
+            margin: "0",
+            cursor: "pointer",
           }}
           onClick={() => setExpand(!expand)}
         >
@@ -55,27 +55,27 @@ function CollapseCard({ id, priceArray }: CollapseCardPropsType) {
           {expand ? <KeyboardArrowUp /> : <KeyboardArrowDown />}
         </Stack>
 
-        <Collapse in={expand} sx={{ width: '100%' }}>
+        <Collapse in={expand} sx={{ width: "100%" }}>
           <Grid
             container
             alignItems="flex-start"
             justifyContent="flex-start"
-            padding={'20px'}
+            padding={"20px"}
           >
             {priceArray.map((price, index) => (
               <Grid item xs={12} key={index}>
                 <Link
                   href={`/?productId=${id}/&price=${price}`}
                   style={{
-                    textDecoration: 'none',
-                    color: 'inherit',
-                    alignSelf: 'flex-start',
+                    textDecoration: "none",
+                    color: "inherit",
+                    alignSelf: "flex-start",
                   }}
                 >
                   <Typography
                     variant="body2"
                     sx={{
-                      '&:hover': { fontWeight: 'bold' },
+                      "&:hover": { fontWeight: "bold" },
                     }}
                   >
                     {price}€ par jour

@@ -1,4 +1,7 @@
 #!/usr/bin/env sh
 . "$(dirname -- "$0")/_/husky.sh"
-
-npm run lint
+npx lint-staged || {
+  echo ':x::x::x::x: You have lint errors. Please fix them before committing. :x::x::x::x:'
+  exit 1
+}
+echo ':white_check_mark::white_check_mark::white_check_mark::white_check_mark: You win this time... I am committing this now. :white_check_mark::white_check_mark::white_check_mark::white_check_mark:'

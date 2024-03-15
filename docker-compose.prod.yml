@@ -1,0 +1,7 @@
+services:
+  frontend:
+    build:
+      context: ./
+      target: prod
+    ports:
+      - 3000:3000 # local:container
