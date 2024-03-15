@@ -1,34 +1,34 @@
-import ProductCard from '@/components/cards/ProductCard';
-import LayoutFull from '@/components/layout/LayoutFull';
-import { Container } from '@mui/material';
+import ProductCard from "@/components/cards/ProductCard";
+import LayoutFull from "@/components/layout/LayoutFull";
+import { Container } from "@mui/material";
 
 const products = [
   {
     id: 1,
-    name: 'Hannibal 100',
-    description: 'Great product tatati tatata ',
+    name: "Hannibal 100",
+    description: "Great product tatati tatata ",
     display: true,
-    brandName: 'Fischer',
+    brandName: "Fischer",
     price: 50,
-    src: '/images/fischer2_mini.png',
+    src: "/images/fischer2_mini.png",
   },
   {
     id: 2,
-    name: 'Hannibal 94',
-    description: 'Great product',
+    name: "Hannibal 94",
+    description: "Great product",
     display: true,
-    brandName: 'Salomon',
+    brandName: "Salomon",
     price: [50, 100, 120],
-    src: '/images/salomon1.png',
+    src: "/images/salomon1.png",
   },
   {
     id: 3,
-    name: 'Hannibal Pro',
-    description: 'Great product',
+    name: "Hannibal Pro",
+    description: "Great product",
     display: true,
-    brandName: 'Fischer',
+    brandName: "Fischer",
     price: 160,
-    src: '/images/fischer2_mini.png',
+    src: "/images/fischer2_mini.png",
   },
 ];
 
@@ -38,12 +38,12 @@ const Home = (): React.ReactNode => {
       <Container
         maxWidth="xl"
         sx={{
-          backgroundColor: '#dfdfdf',
-          display: 'flex',
-          gap: '20px',
-          flex: 'stretch',
-          justifyContent: 'flex-end',
-          padding: '50px 30px',
+          backgroundColor: "#dfdfdf",
+          display: "flex",
+          gap: "20px",
+          flex: "stretch",
+          justifyContent: "flex-end",
+          padding: "50px 30px",
         }}
       >
         {products.map((card, index) => (
