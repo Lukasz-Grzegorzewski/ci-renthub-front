@@ -17,3 +17,5 @@ add on branch toto
 docker compose -f docker-compose.prod.yml up --build
 
 docker compose down -v && docker compose up
+
+test
