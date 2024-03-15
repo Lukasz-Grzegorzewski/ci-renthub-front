@@ -46,7 +46,7 @@ jobs:
         id: tag_sha
         with:
           cond: ${{ endsWith(steps.meta.outputs.tags, ':main') }}
-          if_true: "renthub/front:${{github.sha}}"
+          if_true: "renthub/front:v${{github.sha}}"
           if_false: ${{ steps.meta.outputs.tags }}
 
       - name: Use conditional value
