@@ -38,7 +38,7 @@ jobs:
         id: meta
         uses: docker/metadata-action@v5
         with:
-          images: renthub/front
+          images: ${{ secrets.DOCKERHUB_USERNAME }}/${{ secrets.DOCKERHUB_REPO }}
 
       - name: Set up QEMU
         uses: docker/setup-qemu-action@v3
@@ -75,7 +75,7 @@ jobs:
         id: meta
         uses: docker/metadata-action@v5
         with:
-          images: renthub/front
+          images: ${{ secrets.DOCKERHUB_USERNAME }}/${{ secrets.DOCKERHUB_REPO }}
 
       - 
         uses: haya14busa/action-cond@v1
@@ -83,7 +83,7 @@ jobs:
         id: tag_sha
         with:
           cond: ${{ endsWith(steps.meta.outputs.tags, ':main') }}
-          if_true: "renthub/front:${{github.sha}}"
+          if_true: "${{ secrets.DOCKERHUB_USERNAME }}/${{ secrets.DOCKERHUB_REPO }}:${{github.sha}}"
           if_false: ${{ steps.meta.outputs.tags }}
 
       - 
