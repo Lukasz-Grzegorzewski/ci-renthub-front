@@ -19,7 +19,6 @@ COPY package.json package.json
 COPY --from=deps /app/node_modules node_modules 
 COPY tsconfig.json tsconfig.json
 COPY .eslintrc.json .eslintrc.json
-# COPY next-env.d.ts next-env.d.ts
 COPY next.config.js next.config.js
 COPY public public
 COPY src src
@@ -32,6 +31,5 @@ COPY --from=deps /app/node_modules node_modules
 COPY --from=build /app/.next ./.next
 COPY package.json package.json
 COPY public public
-# RUN npm i --omit=dev
-RUN npm install --production
+RUN npm install --omit=dev
 CMD npm start
