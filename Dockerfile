@@ -9,16 +9,7 @@ FROM node:18.18.2-alpine3.18 AS dev
 WORKDIR /app
 COPY package.json package.json
 COPY --from=deps /app/node_modules node_modules 
-COPY public public
-COPY src src
-COPY .eslintrc.json .eslintrc.json
-COPY .gitingore .gitingore
-COPY .prettierrc .prettierrc
-COPY jest.config.js jest.config.js
-COPY jest.setup.js jest.setup.js
-COPY next.config.js next.config.js
-COPY README.md README.md
-COPY tsconfig.json tsconfig.json
+COPY . .
 CMD npm run dev
 
 # this step only compile the app (ts to js), do not launch this step
@@ -40,5 +31,7 @@ WORKDIR /app
 COPY --from=deps /app/node_modules node_modules
 COPY --from=build /app/.next ./.next
 COPY package.json package.json
-RUN npm i --omit=dev
+COPY public public
+# RUN npm i --omit=dev
+RUN npm install --production
 CMD npm start
