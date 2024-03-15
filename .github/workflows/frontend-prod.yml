@@ -41,10 +41,6 @@ jobs:
           images: renthub/front
 
       - 
-        name: Debug meta
-        run:  echo "Tags => ${{ steps.meta.outputs.tags }}"
-
-      - 
         uses: haya14busa/action-cond@v1
         name: Tag or Sha
         id: tag_sha
@@ -52,10 +48,6 @@ jobs:
           cond: ${{ endsWith(steps.meta.outputs.tags, ':main') }}
           if_true: "renthub/front:${{github.sha}}"
           if_false: ${{ steps.meta.outputs.tags }}
-
-      - 
-        name: Use conditional value
-        run: echo "tag_sha => ${{ steps.tag_sha.outputs.value }}"
 
       - 
         name: Set up QEMU
