@@ -25,7 +25,6 @@ function ProductCard({
   brandName,
   name,
   price,
-  description,
   src,
 }: ProductCardPropsType) {
   const { color1, color3 } = new VariablesColors();
